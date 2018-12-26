@@ -1,0 +1,135 @@
+/**
+ * vueファイルのstyleで共通で使用する値を定義する
+ * (定数)
+ */
+/* サイズ */
+$contentsMaxWidth = 1240px;
+$contentsHalfWidth = 620px;
+/* カラー */
+$bt-primary-color = #367fa9;
+$bt-dark-color = #343a40;
+$base-bg-color = #fff;
+
+/**
+ * vueファイルのstyleで共通で使用するスタイルを定義する
+ * (mixin)
+ */
+common-contents() {
+  display: flex;
+  max-width: $contentsMaxWidth;
+  height: calc(100vh - 55px);
+  // 横位置の中央寄せ、サイドバーがあるので、marginを使って中央に寄せる
+  margin-left: auto;
+  margin-right: auto;
+  // 縦位置の中央寄せ
+  flex-direction: column;
+  justify-content: center;
+}
+
+// 実際のコンテンツ領域で使用する
+common-contents-half() {
+  max-width: $contentsHalfWidth;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// リンクカラーの生成
+// hover、active、focusは40%明るい色を動的に設定する
+link-color($color) {
+  color: $color;
+
+  &:hover, &:active, &:focus {
+    color: lighten($color, 40%);
+  }
+}
+
+// ボタンカラーの作成
+// hover等は引数で渡された背景色に対して動的に色を作る
+// BOOTSTRAPと併用して使用する前提
+btn-color($bgcolor, $fontcolor) {
+  color: $fontcolor;
+  background-color: $bgcolor;
+  border: $bgcolor;
+
+  &:hover {
+    color: $fontcolor;
+    background-color: darken($bgcolor, 15%);
+    border: darken($bgcolor, 20%);
+  }
+
+  &:focus, &.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+  }
+
+  // BOOTSTRAPのclass：.btnを付けていた場合の対応
+  &:disabled, &.disabled {
+    color: $fontcolor;
+    background-color: lighten($bgcolor, 10%);
+    border: solid 1px $bgcolor;
+    pointer-events: none;
+  }
+
+  // BOOTSTRAPのclass：.btnを付けていた場合の対応
+  &:not(:disabled):not(.disabled):active, .show > &.dropdown-toggle {
+    color: $fontcolor;
+    background-color: darken($bgcolor, 15%);
+    border: darken($bgcolor, 20%);
+  }
+
+  &:not(:disabled):not(.disabled):active:focus, .show > &.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ボタンカラーの作成
+// hover等の色も指定可能
+// BOOTSTRAPと併用して使用する前提
+btn-color-custom($bgcolor, $fontcolor, $strongbgcolor, $strongfontcolor) {
+  color: $fontcolor;
+  background-color: $bgcolor;
+  border: $bgcolor;
+
+  &:hover {
+    color: $strongfontcolor;
+    background-color: $strongbgcolor;
+    border: darken($strongbgcolor, 20%);
+  }
+
+  &:focus, &.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+  }
+
+  // BOOTSTRAPのclass：.btnを付けていた場合の対応
+  &:disabled, &.disabled {
+    color: $fontcolor;
+    background-color: lighten($bgcolor, 10%);
+    border: solid 1px $bgcolor;
+    pointer-events: none;
+  }
+
+  // BOOTSTRAPのclass：.btnを付けていた場合の対応
+  &:not(:disabled):not(.disabled):active, .show > &.dropdown-toggle {
+    color: $strongfontcolor;
+    background-color: $strongbgcolor;
+    border: darken($strongbgcolor, 20%);
+  }
+
+  &:not(:disabled):not(.disabled):active:focus, .show > &.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+  }
+}
+
+/**
+ * 共通class
+ */
+.bg-normal {
+  min-height: 100%;
+  background: base-bg-color;
+  background-color: base-bg-color;
+
+  body {
+    // 既存スタイルの取り消しを行う
+    background: initial;
+    background-color: initial;
+  }
+}
