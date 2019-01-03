@@ -1,5 +1,9 @@
 # quasar-sample
 
+vue-cli3 + quasar-plugin のサンプル。  
+adminテンプレートで、vue-cli3に親和性が高そうなので使ってみたかった。  
+quasarのstylusで使っているようなので、cssはstylusを使ってみた。  
+
 ## Project setup
 ```
 npm install
